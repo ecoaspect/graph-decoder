@@ -82,7 +82,6 @@ var close_obj_array = {
     'r': ')'
 };
 
-
 var prettyprint = true;
 
 var eol = {
@@ -90,6 +89,8 @@ var eol = {
     matlab: '...',
     r: ''
 };
+
+var tab = '  '; // two space tab
 
 String.prototype.repeat = function( num )
 {
@@ -106,14 +107,14 @@ function object_decoder(obj,lang){
     level += 1;
     var str = open_brace[lang]+( pp ? eol[lang]+'\n' : '');
     for(var i in obj){
-        str += (pp ? '\t'.repeat(level) : '')+
+        str += (pp ? tab.repeat(level) : '')+
                 key_left[lang]+i+key_right[lang]+kv_seperator[lang]+
                 JSON_decoder(obj[i], lang)+', '+
                 (pp ? eol[lang]+'\n' : '');
     }
     level -= 1;
     str = str.substr(0, str.length-(2 + (pp ? eol[lang]+'\n' : '').length)) +
-        (pp ? eol[lang]+'\n'+'\t'.repeat(level) : '') +
+        (pp ? eol[lang]+'\n'+tab.repeat(level) : '') +
         close_brace[lang];
     return str;
 }
@@ -219,10 +220,6 @@ data = [{
      }
 ];
 
-layout = {'title': 'test', 
-        'xaxis': {'range': [0, 10], 'title': 'xaxis title'},
-        'yaxis': {'title': 'yaxis title'}};
-
-
 console.log(JSON_decoder(data, 'python'));
 console.log(JSON_decoder(data, 'matlab'));
+console.log(JSON_decoder(data, 'r'));
