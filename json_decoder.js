@@ -2,98 +2,113 @@ var open_obj = {
     'python': '{',
     'matlab': 'struct(',
     'r': 'list(',
-    'julia': '['
+    'julia': '[',
+    perl: '{'
 };
 
 var close_obj = {
     'python': '}',
     'matlab': ')',
     'r': ')',
-    'julia': ']'
+    'julia': ']',
+    perl: '}'
 };
 
 var key_left = {
     'python': '"',
     'matlab': "'",
     'r': '',
-    'julia': '"'
+    'julia': '"',
+    perl: "'"
 };
 
 var key_right = {
     'python': '"',
     'matlab': "'",
     'r': '',
-    'julia': '"'
+    'julia': '"',
+    perl: "'"
 };
 
 var kv_seperator = {
     'python': ': ',
     'matlab': ', ',
     'r': ' = ',
-    'julia': ' => '
+    'julia': ' => ',
+    perl: '=>'
 };
 
 var quoties = {
     'python': '"',
     'matlab': "'",
     'r': '"',
-    'julia': '"'
+    'julia': '"',
+    perl: "'"
+
 };
 
 var True = {
     'python': 'True',
     'matlab': 'true',
     'r': 'TRUE',
-    julia: 'true'
+    julia: 'true',
+    perl: 'JSON::true'
 };
 
 var False = {
     'python': 'False',
     'matlab': 'false',
     'r': 'FALSE', 
-    julia: true 
+    julia: true,
+    perl: 'JSON::false'
 };
 
 var NAN = {
     'python': 'None',
     'matlab': 'NaN',
     'r': 'NaN',
-    julia: 'NaN'
+    julia: 'NaN',
+    perl: 'NaN'
 };
 
 var Null = {
     'python': 'None',
     'matlab': 'NaN',
     'r': 'Null',
-    julia: 'None'
+    julia: 'None',
+    perl: 'undef'
 };
 
 var open_str_array = {
     'python': '[',
     'matlab': '{ {',
     'r': 'c(',
-    julia: '['
+    julia: '[',
+    perl: '['
 };
 
 var close_str_array = {
     'python': ']',
     'matlab': '} }',
     'r': ')',
-    julia: ']'
+    julia: ']',
+    perl: ']'
 };
 
 var open_obj_array = {
     'python': '[',
     'matlab': '{',
     'r': 'list(',
-    julia: '['        
+    julia: '[',
+    perl: '['        
 };
 
 var close_obj_array = {
     'python': ']',
     'matlab': '}',
     'r': ')',
-    julia: ']'
+    julia: ']',
+    perl: ']'
 };
 
 var prettyprint = true;
@@ -102,7 +117,8 @@ var eol = {
     python: '',
     matlab: '...',
     r: '',
-    julia: ''
+    julia: '',
+    perl: ''
 };
 
 var tab = '  '; // two space tab
@@ -239,3 +255,5 @@ console.log(JSON_decoder(data, 'python'));
 console.log(JSON_decoder(data, 'matlab'));
 console.log(JSON_decoder(data, 'r'));
 console.log(JSON_decoder(data, 'julia'));
+console.log(JSON_decoder(data, 'perl'));
+
