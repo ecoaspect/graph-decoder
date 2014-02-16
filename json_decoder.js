@@ -1,85 +1,99 @@
-var open_brace = {
+var open_obj = {
     'python': '{',
     'matlab': 'struct(',
-    'r': 'list('
+    'r': 'list(',
+    'julia': '['
 };
 
-var close_brace = {
+var close_obj = {
     'python': '}',
     'matlab': ')',
-    'r': ')'
+    'r': ')',
+    'julia': ']'
 };
 
 var key_left = {
     'python': '"',
     'matlab': "'",
-    'r': '' 
+    'r': '',
+    'julia': '"'
 };
 
 var key_right = {
     'python': '"',
     'matlab': "'",
-    'r': '' 
+    'r': '',
+    'julia': '"'
 };
 
 var kv_seperator = {
     'python': ': ',
     'matlab': ', ',
-    'r': ' = '
+    'r': ' = ',
+    'julia': ' => '
 };
 
 var quoties = {
     'python': '"',
     'matlab': "'",
-    'r': '"'
+    'r': '"',
+    'julia': '"'
 };
 
 var True = {
     'python': 'True',
     'matlab': 'true',
-    'r': 'TRUE'  
+    'r': 'TRUE',
+    julia: 'true'
 };
 
 var False = {
     'python': 'False',
     'matlab': 'false',
-    'r': 'FALSE'  
+    'r': 'FALSE', 
+    julia: true 
 };
 
 var NAN = {
     'python': 'None',
     'matlab': 'NaN',
-    'r': 'NaN'
+    'r': 'NaN',
+    julia: 'NaN'
 };
 
 var Null = {
     'python': 'None',
     'matlab': 'NaN',
-    'r': 'Null'
+    'r': 'Null',
+    julia: 'None'
 };
 
 var open_str_array = {
     'python': '[',
     'matlab': '{ {',
-    'r': 'c('
+    'r': 'c(',
+    julia: '['
 };
 
 var close_str_array = {
     'python': ']',
     'matlab': '} }',
-    'r': ')'
+    'r': ')',
+    julia: ']'
 };
 
 var open_obj_array = {
     'python': '[',
     'matlab': '{',
-    'r': 'list('
+    'r': 'list(',
+    julia: '['        
 };
 
 var close_obj_array = {
     'python': ']',
     'matlab': '}',
-    'r': ')'
+    'r': ')',
+    julia: ']'
 };
 
 var prettyprint = true;
@@ -87,7 +101,8 @@ var prettyprint = true;
 var eol = {
     python: '',
     matlab: '...',
-    r: ''
+    r: '',
+    julia: ''
 };
 
 var tab = '  '; // two space tab
@@ -105,7 +120,7 @@ function object_decoder(obj,lang){
     var n = Object.keys(obj).length;
     var pp = prettyprint && n > 1;
     level += 1;
-    var str = open_brace[lang]+( pp ? eol[lang]+'\n' : '');
+    var str = open_obj[lang]+( pp ? eol[lang]+'\n' : '');
     for(var i in obj){
         str += (pp ? tab.repeat(level) : '')+
                 key_left[lang]+i+key_right[lang]+kv_seperator[lang]+
@@ -115,7 +130,7 @@ function object_decoder(obj,lang){
     level -= 1;
     str = str.substr(0, str.length-(2 + (pp ? eol[lang]+'\n' : '').length)) +
         (pp ? eol[lang]+'\n'+tab.repeat(level) : '') +
-        close_brace[lang];
+        close_obj[lang];
     return str;
 }
 
@@ -223,3 +238,4 @@ data = [{
 console.log(JSON_decoder(data, 'python'));
 console.log(JSON_decoder(data, 'matlab'));
 console.log(JSON_decoder(data, 'r'));
+console.log(JSON_decoder(data, 'julia'));
